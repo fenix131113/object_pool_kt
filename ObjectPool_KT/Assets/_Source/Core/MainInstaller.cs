@@ -34,7 +34,7 @@ namespace Core
                 .AsSingle()
                 .NonLazy();
 
-            Container.Bind<BulletFactory>()
+            Container.BindFactory<Bullet, BulletFactory>()
                 .AsSingle()
                 .NonLazy();
         }

@@ -24,13 +24,13 @@ namespace ShootSystem
         private void Init()
         {
             for (var i = 0; i < _settings.StartPoolCount; i++)
-                PutToPool(_bulletFactory.CreateBullet());
+                PutToPool(_bulletFactory.Create());
         }
 
         public Bullet GetFromPool()
         {
             if (_bullets.Count == 0)
-                PutToPool(_bulletFactory.CreateBullet());
+                PutToPool(_bulletFactory.Create());
             
             var bullet = _bullets.Dequeue();
             _unavailableBullets.Add(bullet);
