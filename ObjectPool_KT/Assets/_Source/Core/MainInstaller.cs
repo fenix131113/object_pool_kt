@@ -1,3 +1,4 @@
+using Core.ObjectPool;
 using Player;
 using ShootSystem;
 using ShootSystem.Data;
@@ -25,7 +26,8 @@ namespace Core
 
         private void BindShootSystem()
         {
-            Container.Bind<BulletPool>()
+            Container.Bind<IObjectPool<Bullet>>()
+                .To<BulletPool>()
                 .AsSingle()
                 .NonLazy();
             

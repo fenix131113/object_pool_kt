@@ -1,4 +1,5 @@
-﻿using Player;
+﻿using Core.ObjectPool;
+using Player;
 using UnityEngine;
 using Zenject;
 
@@ -9,10 +10,10 @@ namespace ShootSystem
         [SerializeField] private Transform shootPoint;
         
         private InputListener _input;
-        private BulletPool _bulletPool;
+        private IObjectPool<Bullet> _bulletPool;
         
         [Inject]
-        private void Construct(InputListener input, BulletPool bulletPool)
+        private void Construct(InputListener input, IObjectPool<Bullet> bulletPool)
         {
             _input = input;
             _bulletPool = bulletPool;
