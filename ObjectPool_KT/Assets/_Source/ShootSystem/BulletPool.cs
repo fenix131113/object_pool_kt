@@ -8,6 +8,7 @@ namespace ShootSystem
     public class BulletPool
     {
         private readonly Queue<Bullet> _bullets = new();
+        private readonly List<Bullet> _unavailableBullets = new();
         private readonly BulletPoolSettings _settings;
         private readonly BulletFactory _bulletFactory;
         
@@ -32,6 +33,7 @@ namespace ShootSystem
                 PutToPool(_bulletFactory.CreateBullet());
             
             var bullet = _bullets.Dequeue();
+            _unavailableBullets.Add(bullet);
 
             bullet.OnBulletLifeEnd += PutToPool;
             
@@ -48,6 +50,9 @@ namespace ShootSystem
                 return;
             }
 
+            if(_unavailableBullets.Contains(bullet))
+                _unavailableBullets.Remove(bullet);
+            
             bullet.gameObject.SetActive(false);
             _bullets.Enqueue(bullet);
         }
